@@ -4,10 +4,11 @@ namespace Notit.Shared.Models
 {
     public class Comment
     {
-        public Comment(string text, string user) 
+        public Comment(string text, string user, long threadid) 
         { 
             Text = text;
             User = user;
+            ThreadId = threadid;
         }
 
         public long CommentId { get; set; }
