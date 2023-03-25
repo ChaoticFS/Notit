@@ -5,10 +5,17 @@ namespace Notit.Shared.Models
 {
     public class Thread
     {
+        public Thread(string content, string user, DateTime date)
+        {
+            Content = content;
+            User = user;
+            Date = date;
+        }
         public Thread(string content, string user)
         {
             Content = content;
             User = user;
+            Date = DateTime.Now;
         }
 
         public long ThreadId { get; set; }
