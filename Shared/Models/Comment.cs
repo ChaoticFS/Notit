@@ -4,21 +4,19 @@ namespace Notit.Shared.Models
 {
     public class Comment
     {
-        public Comment(string text, string user, DateTime date, long threadid) 
+        public Comment(string text, string user, DateTime date) 
         { 
             Text = text;
             User = user;
             Date = date;
             Score = 0;
-            ThreadId = threadid;
         }
-        public Comment(string text, string user, long threadid)
+        public Comment(string text, string user)
         {
             Text = text;
             User = user;
             Date = DateTime.Now;
             Score = 0;
-            ThreadId = threadid;
         }
 
         public long CommentId { get; set; }
@@ -26,6 +24,5 @@ namespace Notit.Shared.Models
         public string User { get; set; }
         public DateTime Date { get; set; }
         public int Score { get; set; }
-        public long ThreadId { get; set; }
     }
 }
