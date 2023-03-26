@@ -1,4 +1,5 @@
 ﻿using System;
+using Thread = Notit.Shared.Models.Thread;
 
 namespace Notit.Shared.Models
 {
@@ -24,5 +25,7 @@ namespace Notit.Shared.Models
         public string User { get; set; }
         public DateTime Date { get; set; }
         public int Score { get; set; }
+
+        public Thread Thread { get; set; }
     }
 }
