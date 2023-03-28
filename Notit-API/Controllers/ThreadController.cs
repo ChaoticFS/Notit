@@ -43,5 +43,16 @@ namespace Notit.API.Controllers
             Db.Threads.Remove(thread);
             Db.SaveChanges();
         }
+
+        [HttpGet("frontpage")]
+        public List<Thread> GetFrontPage()
+        {
+            var result = Db.Threads
+                .OrderByDescending(t => t.Date)
+                .Take(50)
+                .ToList();
+
+            return result;
+        }
     }
 }
