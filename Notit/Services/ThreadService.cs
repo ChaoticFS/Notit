@@ -18,5 +18,24 @@ namespace Notit.Client.Services
             var result = httpClient.GetFromJsonAsync<Thread>($"api/thread?id={threadId}");
             return result;
         }
+        public Task PostThread(Thread thread)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task PutThread(Thread thread)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task DeleteThread(Thread thread)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Thread[]> GetFrontPage()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

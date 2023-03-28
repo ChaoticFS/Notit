@@ -17,5 +17,25 @@ namespace Notit.Client.Services
             var result = httpClient.GetFromJsonAsync<Comment>($"api/comment?id={commentId}");
             return result;
         }
+
+        public Task PostComment(Comment comment)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task PutComment(Comment comment)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task DeleteComment(Comment comment)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task GetComments(int threadid)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
