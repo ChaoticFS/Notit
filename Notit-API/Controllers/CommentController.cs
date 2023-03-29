@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Notit.API.Models;
 using Notit.Shared.Models;
+using System.Text.Json;
 
 namespace Notit.API.Controllers
 {
@@ -36,8 +37,9 @@ namespace Notit.API.Controllers
         }
 
         [HttpDelete]
-        public void Delete(Comment comment)
+        public void Delete(string parameters)
         {
+            Comment comment = JsonSerializer.Deserialize<Comment>(parameters);
             Db.Comments.Remove(comment);
             Db.SaveChanges();
         }

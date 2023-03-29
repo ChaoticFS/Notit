@@ -1,5 +1,6 @@
 ﻿using Notit.Shared.Models;
 using System.Net.Http.Json;
+using System.Text.Json;
 using Thread = Notit.Shared.Models.Thread;
 
 namespace Notit.Client.Services
@@ -20,22 +21,27 @@ namespace Notit.Client.Services
         }
         public Task PostThread(Thread thread)
         {
-            throw new NotImplementedException();
+            httpClient.PostAsJsonAsync<Thread>($"api/thread", thread);
+            return Task.CompletedTask;
         }
 
         public Task PutThread(Thread thread)
         {
-            throw new NotImplementedException();
+            httpClient.PutAsJsonAsync<Thread>($"api/thread", thread);
+            return Task.CompletedTask;
         }
 
         public Task DeleteThread(Thread thread)
         {
-            throw new NotImplementedException();
+            string parameters = JsonSerializer.Serialize(thread);
+            httpClient.DeleteAsync($"api/thread?parameters={parameters}");
+            return Task.CompletedTask;
         }
 
         public Task<Thread[]> GetFrontPage()
         {
-            throw new NotImplementedException();
+            var result = httpClient.GetFromJsonAsync<Thread[]>($"api/thread/frontpage");
+            return result;
         }
     }
 }

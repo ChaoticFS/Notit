@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Notit.API.Models;
 using Notit.Shared.Models;
+using System.Text.Json;
 using Thread = Notit.Shared.Models.Thread;
 
 namespace Notit.API.Controllers
@@ -38,8 +39,9 @@ namespace Notit.API.Controllers
         }
 
         [HttpDelete]
-        public void Delete(Thread thread)
+        public void Delete(string parameters)
         {
+            Thread thread = JsonSerializer.Deserialize<Thread>(parameters);
             Db.Threads.Remove(thread);
             Db.SaveChanges();
         }

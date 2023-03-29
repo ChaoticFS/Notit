@@ -22,7 +22,7 @@ namespace Notit.Shared.Models
         public string Content { get; set; }
         public string User { get; set; }
         public DateTime Date { get; set; }
-        public int Score { get; set; }
-        public List<Comment> Comments { get; set; }
+        public int Score { get; set; } = 0;
+        public List<Comment> Comments { get; set; } = new List<Comment>();
     }
 }
