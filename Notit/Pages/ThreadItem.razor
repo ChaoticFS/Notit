@@ -1,0 +1,86 @@
+﻿<!--
+Notice how this route has a route parameter 'id'. This is how we can pass data to the route.
+See how the links are made in 'PostList.razor'.
+-->
+@page "/thread/{id}"
+
+@using Notit.Shared.Models;
+@using Notit.Client.Services;
+@using Post = Notit.Shared.Models.Thread;
+
+<PageTitle>Kreddit</PageTitle>
+
+<style>
+    div.contents {
+        background-color: #f2f0eb;
+        width: 600px;
+        border: 2px solid #452d3d;
+        padding: 10px;
+        margin-top: 20px;
+    }
+</style>
+
+@if (Thread == null)
+{
+    <p><em>Det tager tid makker</em></p>
+}
+else
+{
+    <div class="contents">
+        <h4>@Thread.Content</h4>
+        <p><strong>User: @Thread.User, Votes: @(Thread.Score)</strong></p>
+    </div>
+
+    <div class="contents">
+        <h4>Comments</h4>
+        <table>
+            <tr>
+                <th>User</th>
+                <th>Comment</th>
+                <th colspan="3">Votes</th>
+            </tr>
+            @foreach (var comment in Thread.Comments)
+            {
+                <tr>
+                    <td>@comment.User</td>
+                    <td>@comment.CommentId</td>
+                    <td>@(comment.Score)</td>
+                    <td><button @onclick="() => Upvote(comment.CommentId)">Upvote</button></td>
+                    <td><button @onclick="() => Downvote(comment.CommentId)">Downvote</button></td>
+                </tr>
+            }
+        </table>
+    </div>
+
+    <!-- This demonstrates how to pass in ThreadId to the component 'CreateComment'. See how
+         it is used in the file CreateComment.razor -->
+    <CreateComment ThreadId=@ThreadId></CreateComment>
+}
+
+@code {
+
+    [Inject]
+    public CommentService commentService { get; set; }
+
+    [Inject]
+    public ThreadService threadService { get; set; }
+
+    [Parameter]
+    public string Id { get; set; }
+    public int ThreadId { get { return int.Parse(Id); } }
+    public Thread Thread { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Thread = await ThreadService.GetThread(ThreadId);
+    }
+    private async void Upvote(long id)
+    {
+        Console.WriteLine("Not implemented 😪");
+    }
+
+    private async void Downvote(long id)
+    {
+        Console.WriteLine("Not implemented 😪");
+    }
+}
