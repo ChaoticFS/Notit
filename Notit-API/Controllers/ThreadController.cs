@@ -56,5 +56,15 @@ namespace Notit.API.Controllers
 
             return result;
         }
+
+        public bool IsSeeded()
+        {
+            Thread? thread = Db.Threads.FirstOrDefault();
+            if (thread == null)
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }
