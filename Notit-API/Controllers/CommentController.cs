@@ -17,7 +17,7 @@ namespace Notit.API.Controllers
         }
 
         [HttpGet]
-        public Comment Get(int id)
+        public Comment Get(long id)
         {
             return Db.Comments.Find(id);
         }
