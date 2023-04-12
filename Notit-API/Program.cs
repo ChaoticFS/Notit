@@ -6,10 +6,22 @@ using Thread = Notit.Shared.Models.Thread;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var AllowCors = "_AllowCors";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: AllowCors, builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyHeader()
+               .AllowAnyMethod();
+    });
+});
+
 builder.Services.AddDbContext<NotitContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("ContextSQLite")));
 
-builder.Services.AddControllers();
+builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
 
 builder.Services.AddScoped<CommentController>();
 builder.Services.AddScoped<ThreadController>();
@@ -36,6 +48,15 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
+app.UseHttpsRedirection();
+app.UseCors(AllowCors);
+
+app.UseStaticFiles();
+
+app.UseRouting();
+
+app.MapRazorPages();
 app.MapControllers();
+app.MapFallbackToFile("index.html");
 
 app.Run();
