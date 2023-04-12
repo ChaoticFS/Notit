@@ -5,6 +5,7 @@
     <br />
     <h3>Skriv en kommentar:)</h3>
     <input placeholder="Content" type="input" id="content" @bind-value="content" />
+    <input placeholder="User" type="input" id="user" @bind-value="user" />
     <button id="createPostButton" type="button" @onclick="CreateNewComment">Udgiv kommentar</button>
 </div>
 
@@ -14,22 +15,20 @@
     [Inject]
     public CommentService commentService { get; set; }
 
-    [Inject]
-    public ThreadService threadService { get; set; }
-
-
-    // PostId is passed in from the parent component. See how in PostItem.razor.
     [Parameter]
     public int ThreadId { get; set; }
     private string? content;
+    private string? user;
     private async void CreateNewComment()
     {
         if (content == null)
         {
             return;
         }
-        // TODO: Provide list of users from dropdown, or maybe just convert
-        // from username to UserId
-        await commentService.PostComment(content, ThreadId, 2); // UserId: 2
+        
+        Comment commentModel = new Comment(content, user);
+        commentModel.Thread.ThreadId = ThreadId;
+
+        await commentService.PostComment(commentModel);
     }
 }

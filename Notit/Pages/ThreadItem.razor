@@ -1,14 +1,10 @@
-﻿<!--
-Notice how this route has a route parameter 'id'. This is how we can pass data to the route.
-See how the links are made in 'PostList.razor'.
--->
-@page "/thread/{id}"
+﻿@page "/thread/{id}"
 
 @using Notit.Shared.Models;
 @using Notit.Client.Services;
-@using Post = Notit.Shared.Models.Thread;
+@using Thread = Notit.Shared.Models.Thread;
 
-<PageTitle>Kreddit</PageTitle>
+<PageTitle>Notit</PageTitle>
 
 <style>
     div.contents {
@@ -52,8 +48,6 @@ else
         </table>
     </div>
 
-    <!-- This demonstrates how to pass in ThreadId to the component 'CreateComment'. See how
-         it is used in the file CreateComment.razor -->
     <CreateComment ThreadId=@ThreadId></CreateComment>
 }
 
@@ -72,15 +66,25 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        Thread = await ThreadService.GetThread(ThreadId);
+        Thread = await threadService.GetThread(ThreadId);
+
+        Console.WriteLine(Thread.ToString());
+
+        var comments = await commentService.GetComments(ThreadId);
+        foreach (var item in comments)
+        {
+            Thread.Comments.Add(item);
+        }
     }
     private async void Upvote(long id)
     {
-        Console.WriteLine("Not implemented 😪");
+        Thread.Score++;
+        await threadService.PutThread(Thread);
     }
 
     private async void Downvote(long id)
     {
-        Console.WriteLine("Not implemented 😪");
+        Thread.Score--;
+        await threadService.PutThread(Thread);
     }
 }
