@@ -14,9 +14,9 @@ namespace Notit.Client.Services
             this.httpClient = httpClient;
         }
 
-        public Task<Thread> GetThread (int threadId) 
+        public Task<Thread> GetThread (int id) 
         {
-            var result = httpClient.GetFromJsonAsync<Thread>($"api/thread?id={threadId}");
+            var result = httpClient.GetFromJsonAsync<Thread>($"api/thread?id={id}");
             return result;
         }
         public Task PostThread(Thread thread)

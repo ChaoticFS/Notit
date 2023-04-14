@@ -5,6 +5,10 @@ namespace Notit.Shared.Models
 {
     public class Comment
     {
+        public Comment()
+        {
+        }
+
         public Comment(string text, string user, DateTime date) 
         { 
             Text = text;

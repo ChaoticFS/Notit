@@ -19,7 +19,7 @@ namespace Notit.API.Controllers
         }
 
         [HttpGet]
-        public Thread Get(int id)
+        public Thread Get(long id)
         {
             return Db.Threads.Find(id);
         }

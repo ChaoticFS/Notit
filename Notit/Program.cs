@@ -11,12 +11,12 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 
 builder.Services.AddHttpClient<CommentService>(client =>
 {
-    client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
+    client.BaseAddress = new Uri("https://localhost:7235/");
 });
 
 builder.Services.AddHttpClient<ThreadService>(client =>
 {
-    client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
+    client.BaseAddress = new Uri("https://localhost:7235/");
 });
 
 await builder.Build().RunAsync();
